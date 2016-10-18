@@ -1,0 +1,26 @@
+{
+  "name": "final-typescript-project",
+  "version": "1.0.1",
+  "description": "A test project to play with typescript",
+  "main": "index.js",
+  "scripts": {
+    "tsc:w": "tsc --watch",
+    "start": "concurrently \"npm run tsc:w\" \"superstatic\" ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarioG/typescript-test-project.git"
+  },
+  "author": "Dario Garcia Moya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarioG/typescript-test-project/issues"
+  },
+  "homepage": "https://github.com/DarioG/typescript-test-project#readme",
+  "devDependencies": {
+    "concurrently": "^3.1.0",
+    "superstatic": "^4.0.3",
+    "typescript": "^2.0.3"
+  }
+}
