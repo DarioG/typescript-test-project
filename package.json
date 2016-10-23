@@ -2,10 +2,9 @@
   "name": "final-typescript-project",
   "version": "1.0.1",
   "description": "A test project to play with typescript",
-  "main": "index.js",
   "scripts": {
     "tsc:w": "tsc --watch",
-    "start": "concurrently \"npm run tsc:w\" \"superstatic\" ",
+    "start": "concurrently \"npm run tsc:w\" \"superstatic\" \"webpack --watch\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,7 +19,14 @@
   "homepage": "https://github.com/DarioG/typescript-test-project#readme",
   "devDependencies": {
     "concurrently": "^3.1.0",
+    "source-map-loader": "^0.1.5",
     "superstatic": "^4.0.3",
-    "typescript": "^2.0.3"
+    "ts-loader": "^0.9.5",
+    "typescript": "^2.0.3",
+    "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   }
 }
