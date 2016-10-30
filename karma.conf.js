@@ -32,7 +32,9 @@ module.exports = function (config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       './scripts/*.tsx': ["webpack"],
-      './scripts/**/*.ts' :['webpack']
+      './scripts/**/*.ts' :['webpack'],
+      './scripts/**/*.spec.tsx' :['webpack'],
+      './scripts/**/*.spec.ts' :['webpack']
     },
 
 
