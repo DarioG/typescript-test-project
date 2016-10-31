@@ -1,8 +1,11 @@
 module.exports = {
-    entry: "./build/app.js",
+    entry: "./build/scripts/app.js",
     output: {
         path: __dirname,
         filename: "bundle.js"
+    },
+    resolve: {
+        extensions: ['.ts', '.js', '.tsx', '.jsx', '']
     },
     devtool: 'source-map',
     module: {
