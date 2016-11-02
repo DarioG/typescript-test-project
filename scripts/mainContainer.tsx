@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ajax } from './utils/ajax'
+import { Dropdown } from './components/dropdown';
 
 interface MainContainerProps { }
 interface MainContainerState {
@@ -14,6 +15,7 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
             painters: []
         };
     }
+
     componentDidMount() {
         let request = ajax.getJson();
 
@@ -26,19 +28,9 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
         });
     }
 
-    resolvePainters(): any {
-        let { painters } = this.state;
-
-        return painters.map((value: string, key: number) => {
-            return <option
-                key={key}
-                value={value}>
-                {value}
-            </option>;
-        });
-    }
-
     render() {
-        return <select>{this.resolvePainters()}</select>;
+        return <div>
+            <Dropdown painters={this.state.painters} />
+        </div>;
     }
 }

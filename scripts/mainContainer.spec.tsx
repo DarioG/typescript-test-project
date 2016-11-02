@@ -3,6 +3,7 @@ import * as TestUtils from 'react-addons-test-utils';
 import { MainContainer } from './mainContainer';
 import { ajax } from './utils/ajax';
 import { Promise } from 'es6-promise';
+import { Dropdown } from './components/dropdown';
 
 describe('MainContainer', () => {
     let getJsonSpy: jasmine.Spy,
@@ -48,17 +49,15 @@ describe('MainContainer', () => {
 
             it('should print the data into the select', () => {
                 let renderedComponent: any = TestUtils.renderIntoDocument(<MainContainer />),
-                    expected: Array<any>;
+                    expected: Array<string>;
 
                 resolve(promise);
 
-                expected = TestUtils.scryRenderedDOMComponentsWithTag(renderedComponent, 'option');
+                expected = TestUtils.findRenderedComponentWithType(renderedComponent, Dropdown).props.painters;
 
                 expect(expected.length).toBe(2);
-                expect(expected[0].value).toBe('Michelangelo');
-                expect(expected[0].text).toBe('Michelangelo');
-                expect(expected[1].value).toBe('Raphael');
-                expect(expected[1].text).toBe('Raphael');
+                expect(expected[0]).toBe('Michelangelo');
+                expect(expected[1]).toBe('Raphael');
             });
         });
     });
