@@ -27,20 +27,15 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
     }
 
     resolvePainters(): any {
-        let { painters } = this.state,
-            paintersElements: Array<any> = [];
+        let { painters } = this.state;
 
-        painters.forEach((value: string, key: number) => {
-            paintersElements.push(
-                <option
-                    key={key}
-                    value={value}>
-                    {value}
-                </option>
-            )
+        return painters.map((value: string, key: number) => {
+            return <option
+                key={key}
+                value={value}>
+                {value}
+            </option>;
         });
-
-        return paintersElements;
     }
 
     render() {
