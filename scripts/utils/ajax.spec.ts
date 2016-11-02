@@ -15,7 +15,7 @@ describe('ajax', () => {
             let request = ajax.getJson();
 
             expect(jasmine.Ajax.requests.mostRecent().method).toBe('GET');
-            expect(jasmine.Ajax.requests.mostRecent().url).toBe('../../JSON/famousPainter.json');
+            expect(jasmine.Ajax.requests.mostRecent().url).toBe('../../JSON/famousPainters.json');
         });
 
         it('should load the json with the data', (done) => {

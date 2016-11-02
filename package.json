@@ -4,7 +4,7 @@
   "description": "A test project to play with typescript",
   "scripts": {
     "tsc:w": "tsc --watch",
-    "start": "concurrently \"npm run tsc:w\" \"superstatic\" \"webpack --watch\"",
+    "start": "concurrently \"npm run tsc:w\" \"webpack --watch\" \"superstatic\" ",
     "test": "karma start"
   },
   "repository": {
