@@ -4,9 +4,6 @@ module.exports = {
         path: __dirname,
         filename: "bundle.js"
     },
-    resolve: {
-        extensions: ['.ts', '.js', '.tsx', '.jsx', '']
-    },
     devtool: 'source-map',
     module: {
         preLoaders: [{

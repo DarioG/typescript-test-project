@@ -4,7 +4,7 @@ import { Dropdown } from './components/dropdown';
 
 interface MainContainerProps { }
 interface MainContainerState {
-    painters: Array<string>
+    paintersNames: Array<string>
 }
 
 export class MainContainer extends React.Component<MainContainerProps, MainContainerState> {
@@ -12,7 +12,7 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
         super();
 
         this.state = {
-            painters: []
+            paintersNames: []
         };
     }
 
@@ -20,17 +20,17 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
         let request = ajax.getJson();
 
         request.then((data: any) => {
-            let painters = data.famousPainters.map((value: any) => value.name);
+            let paintersNames = data.famousPainters.map((value: any) => value.name);
 
             this.setState({
-                painters: painters
+                paintersNames: paintersNames
             })
         });
     }
 
     render() {
         return <div>
-            <Dropdown painters={this.state.painters} />
+            <Dropdown painters={this.state.paintersNames} />
         </div>;
     }
 }

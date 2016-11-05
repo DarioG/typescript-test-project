@@ -7,13 +7,13 @@ import { Dropdown } from './components/dropdown';
 
 describe('MainContainer', () => {
     let getJsonSpy: jasmine.Spy,
-        promise: any;
+        fakePromise: any;
 
     beforeEach(() => {
-        promise = {
+        fakePromise = {
             then: jasmine.createSpy('promiseSpy')
         };
-        getJsonSpy = spyOn(ajax, 'getJson').and.returnValue(promise);
+        getJsonSpy = spyOn(ajax, 'getJson').and.returnValue(fakePromise);
     });
 
     it('should mount the component properly', () => {
@@ -30,7 +30,7 @@ describe('MainContainer', () => {
         });
 
         describe('when the server response', () => {
-            let resolve = (promise: any) => {
+            let resolve = (fakePromise: any) => {
                 let response = {
                         'famousPainters': [{
                             'name': 'Michelangelo',
@@ -42,7 +42,7 @@ describe('MainContainer', () => {
                             'examples: ': ['School at Athens', 'Lucretia', 'Saint George and the Dragon']
                         }]
                     },
-                    callback = promise.then.calls.mostRecent().args[0];
+                    callback = fakePromise.then.calls.mostRecent().args[0];
 
                 callback(response);
             };
@@ -51,7 +51,7 @@ describe('MainContainer', () => {
                 let renderedComponent: any = TestUtils.renderIntoDocument(<MainContainer />),
                     expected: Array<string>;
 
-                resolve(promise);
+                resolve(fakePromise);
 
                 expected = TestUtils.findRenderedComponentWithType(renderedComponent, Dropdown).props.painters;
 
