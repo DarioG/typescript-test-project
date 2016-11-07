@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { ajax } from './utils/ajax'
 import { Dropdown } from './components/dropdown';
+import { PainterInfo } from './components/painterInfo';
+import { Painters } from './store/painters';
 
 interface MainContainerProps { }
 interface MainContainerState {
-    paintersNames: Array<string>
+    painters: Painters
 }
 
 export class MainContainer extends React.Component<MainContainerProps, MainContainerState> {
@@ -12,7 +14,7 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
         super();
 
         this.state = {
-            paintersNames: []
+            painters: null
         };
     }
 
@@ -20,17 +22,22 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
         let request = ajax.getJson();
 
         request.then((data: any) => {
-            let paintersNames = data.famousPainters.map((value: any) => value.name);
-
             this.setState({
-                paintersNames: paintersNames
+                painters: new Painters(data.famousPainters)
             })
         });
     }
 
     render() {
+        let { painters } = this.state;
+
+        if (!painters) {
+            return null;
+        }
+
         return <div>
-            <Dropdown painters={this.state.paintersNames} />
+            <Dropdown painters={painters.getNames()} />
+            <PainterInfo painter={painters.get('Michelangelo')} />
         </div>;
     }
 }

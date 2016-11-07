@@ -4,6 +4,8 @@ import { MainContainer } from './mainContainer';
 import { ajax } from './utils/ajax';
 import { Promise } from 'es6-promise';
 import { Dropdown } from './components/dropdown';
+import { PainterInfo } from './components/painterInfo';
+import { Painter } from './models/painter';
 
 describe('MainContainer', () => {
     let getJsonSpy: jasmine.Spy,
@@ -33,13 +35,13 @@ describe('MainContainer', () => {
             let resolve = (fakePromise: any) => {
                 let response = {
                         'famousPainters': [{
-                            'name': 'Michelangelo',
-                            'style:': 'Renaissance',
-                            'examples: ': ['David', 'Sistine Chapel', 'The Last Judgement']
+                            name: 'Michelangelo',
+                            style: 'Renaissance',
+                            examples: ['David', 'Sistine Chapel', 'The Last Judgement']
                         }, {
-                            'name': 'Raphael',
-                            'style:': 'Renaissance',
-                            'examples: ': ['School at Athens', 'Lucretia', 'Saint George and the Dragon']
+                            name: 'Raphael',
+                            style: 'Renaissance',
+                            examples: ['School at Athens', 'Lucretia', 'Saint George and the Dragon']
                         }]
                     },
                     callback = fakePromise.then.calls.mostRecent().args[0];
@@ -58,6 +60,19 @@ describe('MainContainer', () => {
                 expect(expected.length).toBe(2);
                 expect(expected[0]).toBe('Michelangelo');
                 expect(expected[1]).toBe('Raphael');
+            });
+
+            it('should show the first painters', () => {
+                let renderedComponent: any = TestUtils.renderIntoDocument(<MainContainer />),
+                    expected: Painter;
+
+                resolve(fakePromise);
+
+                expected = TestUtils.findRenderedComponentWithType(renderedComponent, PainterInfo).props.painter;
+
+                expect(expected.name).toBe('Michelangelo');
+                expect(expected.style).toBe('Renaissance');
+                expect(expected.examples).toEqual(['David', 'Sistine Chapel', 'The Last Judgement']);
             });
         });
     });
