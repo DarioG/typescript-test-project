@@ -1,4 +1,6 @@
 import { Painters } from './painters';
+import { ajax } from '../utils/ajax';
+import { Promise } from 'es6-promise';
 
 describe('Painters', () => {
     let painters: Painters;
@@ -38,6 +40,36 @@ describe('Painters', () => {
     describe('getNames', () => {
         it('should return the painters names', () => {
             expect(painters.getNames()).toEqual(['Michelangelo', 'Raphael', 'Michelangelo1']);
+        });
+    });
+
+    describe('load', () => {
+        beforeEach(() => {
+            spyOn(ajax, 'getJson').and.returnValue(new Promise((resolve) => {
+                resolve({
+                    'famousPainters': [{
+                        name: 'Michelangelo',
+                        style: 'Renaissance',
+                        examples: ['David', 'Sistine Chapel', 'The Last Judgement']
+                    }]
+                });
+            }));
+        });
+
+        describe('when the server response', () => {
+            it('should return an instance of Painters with the data', (done) => {
+                let promise = Painters.load();
+
+                promise.then((painters: Painters) => {
+                    expect(painters.get('Michelangelo')).toEqual({
+                        name: 'Michelangelo',
+                        style: 'Renaissance',
+                        examples: ['David', 'Sistine Chapel', 'The Last Judgement']
+                    });
+
+                    done();
+                });
+            });
         });
     });
 });

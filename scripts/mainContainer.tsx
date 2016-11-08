@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ajax } from './utils/ajax'
 import { Dropdown } from './components/dropdown';
 import { PainterInfo } from './components/painterInfo';
 import { Painters } from './store/painters';
@@ -19,11 +18,9 @@ export class MainContainer extends React.Component<MainContainerProps, MainConta
     }
 
     componentDidMount() {
-        let request = ajax.getJson();
-
-        request.then((data: any) => {
+        Painters.load().then((painters: Painters) => {
             this.setState({
-                painters: new Painters(data.famousPainters)
+                painters: painters
             })
         });
     }
