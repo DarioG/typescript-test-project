@@ -9,8 +9,8 @@ interface PainterInfoState {};
 
 export class PainterInfo extends React.Component<PainterInfoProps, PainterInfoState> {
     resolveExamples(examples: Array<string>): Array<JSX.Element> {
-        return examples.map((example) => {
-            return <li>{example}</li>;
+        return examples.map((example, index) => {
+            return <li key={index}>{example}</li>;
         });
     }
 
