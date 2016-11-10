@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 interface DropdownProps {
-    painters: Array<string>
+    painters: Array<string>;
+    onChange: Function;
 }
 interface DropdownState {}
 
@@ -18,7 +19,11 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         });
     }
 
+    onChange(event: any) {
+        this.props.onChange(event.target.value);
+    }
+
     render() {
-        return <select>{this.resolvePainters()}</select>;
+        return <select onChange={this.onChange.bind(this)}>{this.resolvePainters()}</select>;
     }
 }

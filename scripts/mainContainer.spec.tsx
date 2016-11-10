@@ -63,6 +63,26 @@ describe('MainContainer', () => {
                 expect(expected.style).toBe('Renaissance');
                 expect(expected.examples).toEqual(['David', 'Sistine Chapel', 'The Last Judgement']);
             });
+
+            describe('when another painter is selected', () => {
+                it('should update the painter info', () => {
+                    let renderedComponent: any = TestUtils.renderIntoDocument(<MainContainer />),
+                        callback: Function,
+                        expected: Painter
+
+                    resolve(fakePromise);
+
+                    callback = TestUtils.findRenderedComponentWithType(renderedComponent, Dropdown).props.onChange;
+
+                    callback('Raphael');
+
+                    expected = TestUtils.findRenderedComponentWithType(renderedComponent, PainterInfo).props.painter;
+
+                    expect(expected.name).toBe('Raphael');
+                    expect(expected.style).toBe('Renaissance');
+                    expect(expected.examples).toEqual(['School at Athens', 'Lucretia', 'Saint George and the Dragon']);
+                });
+            });
         });
     });
 });
